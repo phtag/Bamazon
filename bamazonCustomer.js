@@ -16,7 +16,7 @@ var connection = mysql.createConnection({
 });
 connection.connect(function(err) {
     if (err) throw err;
-    runSearch();
+    promptUser();
 });
 //_______________________________________
 //  FUNCTION definitions
@@ -25,7 +25,7 @@ function promptUser() {
     .prompt({
     name: "item_id",
     type: "input",
-    message: "Please enter the ID of the product you want to buy",
+    message: "Please enter the ID of the product you want to buy:",
     })
     .then(function(answer) {
     });
