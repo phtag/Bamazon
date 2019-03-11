@@ -16,16 +16,31 @@ var connection = mysql.createConnection({
 });
 connection.connect(function(err) {
     if (err) throw err;
-    promptUser();
+});
+connection.query("SELECT * FROM products", function(err, res) {
+    if (err) throw err;
+    console.table(res);
+    getProductID();
 });
 //_______________________________________
 //  FUNCTION definitions
-function promptUser() {
+function getProductID() {
     inquirer
     .prompt({
     name: "item_id",
     type: "input",
     message: "Please enter the ID of the product you want to buy:",
+    })
+    .then(function(answer) {
+        getNumberOfUnitsDesired(answer.item_id);
+    });
+}
+function getNumberOfUnitsDesired(productID) {
+    inquirer
+    .prompt({
+    name: "units",
+    type: "input",
+    message: "Please enter the number of units you want to buy for product ID=" + productID + ":",
     })
     .then(function(answer) {
     });
