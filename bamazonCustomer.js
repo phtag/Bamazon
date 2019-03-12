@@ -17,11 +17,17 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
     if (err) throw err;
 });
-connection.query("SELECT * FROM products", function(err, res) {
-    if (err) throw err;
+makeCustomerPurchase();
+
+function makeCustomerPurchase() {
+    connection.query("SELECT * FROM products", function(err, res) {
+    if (err) {
+        throw err;
+    }
     console.table(res);
     getProductID();
 });
+}
 //_______________________________________
 //  FUNCTION definitions
 function getProductID() {
@@ -43,19 +49,20 @@ function getNumberOfUnitsDesired(productID) {
     message: "Please enter the number of units you want to buy for product ID=" + productID + ":",
     })
     .then(function(answer) {
-        connection.query("SELECT stock_quantity FROM products WHERE item_id=" + productID, function(err, res) {
+        connection.query("SELECT product_name, stock_quantity, price FROM products WHERE item_id=" + productID, function(err, res) {
             var currentInventoryLevel = Number(res[0].stock_quantity);
             var purchaseQuantity = Number(answer.units);
             if (currentInventoryLevel < purchaseQuantity) {
-                console.log('Your order exceeds the units available for purchase');
+                console.log('Insufficient quantity!');
+                makeCustomerPurchase();
             } else {
+                var purchaseCost = Number(res[0].price) * purchaseQuantity;
+                var purchasedProductName = res[0].product_name;
+                console.log('Your total purchase price for ' + purchaseQuantity + ' units of product=' + purchasedProductName + ' is $' + purchaseCost);
+
                 connection.query("UPDATE products SET stock_quantity=" + (currentInventoryLevel-purchaseQuantity) + ' WHERE item_id=' + productID, function(err, res) {
-                    connection.query("SELECT * FROM products", function(err, res) {
-                        if (err) throw err;
-                        console.table(res);
-                        getProductID();
-                    });                    
-                });
+                    makeCustomerPurchase();
+                });                    
             }
         });
     });
