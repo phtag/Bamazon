@@ -45,6 +45,12 @@ function getManagerAction() {
 
             case 'View Low Inventory':
 
+                connection.query("SELECT item_id, product_name, price, stock_quantity FROM products ORDER BY stock_quantity ASC LIMIT 5", function(err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    console.table(res);
+                });
                 console.log('Viewing low inventory...')
                 break;
 
