@@ -17,6 +17,7 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
     if (err) throw err;
 });
+
 getManagerAction();
 function getManagerAction() {
     inquirer
@@ -30,6 +31,33 @@ function getManagerAction() {
     })
     .then(function(answer) {
         console.log(answer.action);
+        switch (answer.action) {
+            case 'View Products for Sale':
+
+                connection.query("SELECT item_id, product_name, price, stock_quantity FROM products", function(err, res) {
+                    if (err) {
+                        throw err;
+                    }
+                    console.table(res);
+                });
+                console.log('Viewing products...')
+                break;
+
+            case 'View Low Inventory':
+
+                console.log('Viewing low inventory...')
+                break;
+
+            case 'Add to Inventory':
+
+                console.log('Add to inventory...')
+                break;
+
+            case 'Add New Product':
+
+                console.log('Add new products...')
+                break;
+            }
         // getNumberOfUnitsDesired(answer.item_id);
     });
 }
