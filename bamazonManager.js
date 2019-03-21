@@ -63,8 +63,7 @@ function getManagerAction() {
 
             case 'Add New Product':
 
-                console.log('Add new products...')
-                getManagerAction();
+                addNewProduct();
                 break;
             }
         // getNumberOfUnitsDesired(answer.item_id);
@@ -105,5 +104,45 @@ function addUnitsToItem(item_id, units_to_add) {
             getManagerAction();
         });
     });
-
+}
+function addNewProduct() {
+    inquirer
+    .prompt({
+    name: "product_name",
+    type: "input",
+    message: "Please enter the name of the new product:",
+    })
+    .then(function(answer) {
+        product_name = answer.product_name;
+        inquirer
+            .prompt({
+            name: "price",
+            type: "input",
+            message: "Please enter the price of product '" + product_name + "':",
+            })
+            .then(function(answer) {
+                price = answer.price;
+                inquirer
+                    .prompt({
+                    name: "units",
+                    type: "input",
+                    message: "Please enter the initial number of units to add to inventory for product='" + product_name + "':",
+                    })
+                    .then(function(answer) {
+                        console.log("Got here for product=" + product_name);
+                        units = answer.units;
+                        connection.query("INSERT INTO products (item_id, product_name, price, stock_quantity) VALUES (12, '" + product_name + "'," + price + "," + units + ")", function(err, res) {
+                            if (err) {
+                                console.log(err);
+                                throw err;
+                            }
+                            connection.query("SELECT item_id, product_name, price, stock_quantity FROM products", function(err, res) {
+                                console.log('Viewing products...')
+                                console.table(res);
+                                getManagerAction();
+                            });
+                        });
+                    });
+            });
+    });
 }
