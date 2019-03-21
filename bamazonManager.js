@@ -58,8 +58,7 @@ function getManagerAction() {
 
             case 'Add to Inventory':
 
-                console.log('Add to inventory...')
-                getManagerAction();
+                getProductID();
                 break;
 
             case 'Add New Product':
@@ -92,9 +91,19 @@ function getUnitsToItem(item_id) {
     message: "Please enter the number of units to add to inventory:",
     })
     .then(function(answer) {
-        addUnitsToItem(answer.units_to_add);
+        addUnitsToItem(item_id, answer.units_to_add);
     });
 }
-function addUnitsToItem(units_to_add) {
+function addUnitsToItem(item_id, units_to_add) {
+    connection.query("UPDATE products SET stock_quantity=stock_quantity+" + units_to_add + " WHERE item_id=" + item_id, function(err, res) {
+        if (err) {
+            throw err;
+        }
+        connection.query("SELECT item_id, product_name, price, stock_quantity FROM products", function(err, res) {
+            console.log('Viewing products...')
+            console.table(res);
+            getManagerAction();
+        });
+    });
 
 }
