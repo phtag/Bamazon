@@ -38,32 +38,63 @@ function getManagerAction() {
                     if (err) {
                         throw err;
                     }
+                    console.log('Viewing products...')
                     console.table(res);
+                    getManagerAction();
                 });
-                console.log('Viewing products...')
                 break;
 
             case 'View Low Inventory':
 
-                connection.query("SELECT item_id, product_name, price, stock_quantity FROM products ORDER BY stock_quantity ASC LIMIT 5", function(err, res) {
+                connection.query("SELECT item_id, product_name, price, stock_quantity FROM products WHERE stock_quantity < 500 ORDER BY stock_quantity ASC", function(err, res) {
                     if (err) {
                         throw err;
                     }
+                    console.log('Viewing low inventory...')
                     console.table(res);
+                    getManagerAction();
                 });
-                console.log('Viewing low inventory...')
                 break;
 
             case 'Add to Inventory':
 
                 console.log('Add to inventory...')
+                getManagerAction();
                 break;
 
             case 'Add New Product':
 
                 console.log('Add new products...')
+                getManagerAction();
                 break;
             }
         // getNumberOfUnitsDesired(answer.item_id);
     });
+}
+
+function getProductID() {
+    inquirer
+    .prompt({
+    name: "item_id",
+    type: "input",
+    message: "Please enter the ID of the product you to add inventory to:",
+    })
+    .then(function(answer) {
+        getUnitsToItem(answer.item_id);
+    });
+}
+
+function getUnitsToItem(item_id) {
+    inquirer
+    .prompt({
+    name: "units_to_add",
+    type: "input",
+    message: "Please enter the number of units to add to inventory:",
+    })
+    .then(function(answer) {
+        addUnitsToItem(answer.units_to_add);
+    });
+}
+function addUnitsToItem(units_to_add) {
+
 }
