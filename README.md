@@ -39,8 +39,11 @@ For the manager program, managers can:
 * Add new products to the store
 
 ![Customer program Screenshot](/images/Bamazon-manager-screenShot.jpg)
-![Constructor word game Screenshot](Constructor-word-game2.jpg)
 
-![Constructor word game Screenshot](Constructor-word-game3.jpg)
+For the supervisor program, supervisors can:
+* View product sales by department
+* Create new departments
+
+![Customer program Screenshot](/images/Bamazon-supervisor-screenShot.jpg)
 
 This project is maintained by Peter Tag
