@@ -150,7 +150,7 @@ function addNewProduct() {
                             // in case the ID field was NOT auto-generated
                             var numRecords = res[0].numRecords;
 
-                            connection.query("INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES ('" + product_name + "','" + department_name + "'," + price + "," + units + ")", function(err, res) {
+                            connection.query("INSERT INTO products (product_name, department_name, price, stock_quantity, product_sales) VALUES ('" + product_name + "','" + department_name + "'," + price + "," + units + ", 0)", function(err, res) {
                                     if (err) {
                                     console.log(err);
                                     throw err;
