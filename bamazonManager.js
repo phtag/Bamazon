@@ -131,15 +131,19 @@ function addNewProduct() {
                     .then(function(answer) {
                         console.log("Got here for product=" + product_name);
                         units = answer.units;
-                        connection.query("INSERT INTO products (item_id, product_name, price, stock_quantity) VALUES (12, '" + product_name + "'," + price + "," + units + ")", function(err, res) {
-                            if (err) {
-                                console.log(err);
-                                throw err;
-                            }
-                            connection.query("SELECT item_id, product_name, price, stock_quantity FROM products", function(err, res) {
-                                console.log('Viewing products...')
-                                console.table(res);
-                                getManagerAction();
+                        connection.query("SELECT COUNT(*) as numRecords FROM products", function(err, res) {
+                            var numRecords = res[0].numRecords;
+                            console.log('numRecords='+numRecords);
+                            connection.query("INSERT INTO products (item_id, product_name, price, stock_quantity) VALUES (" + (numRecords+1) + ", '" + product_name + "'," + price + "," + units + ")", function(err, res) {
+                                if (err) {
+                                    console.log(err);
+                                    throw err;
+                                }
+                                connection.query("SELECT item_id, product_name, price, stock_quantity FROM products", function(err, res) {
+                                    console.log('Viewing products...')
+                                    console.table(res);
+                                    getManagerAction();
+                                });
                             });
                         });
                     });
