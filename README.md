@@ -38,8 +38,7 @@ For the manager program, managers can:
 * Add inventory to products
 * Add new products to the store
 
-![Constructor word game Screenshot](Constructor-word-game.jpg)
-
+![Customer program Screenshot](/images/Bamazon-manager-screenShot.jpg)
 ![Constructor word game Screenshot](Constructor-word-game2.jpg)
 
 ![Constructor word game Screenshot](Constructor-word-game3.jpg)
