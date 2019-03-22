@@ -49,18 +49,20 @@ function getNumberOfUnitsDesired(productID) {
     message: "Please enter the number of units you want to buy for product ID=" + productID + ":",
     })
     .then(function(answer) {
-        connection.query("SELECT product_name, stock_quantity, price FROM products WHERE item_id=" + productID, function(err, res) {
+        connection.query("SELECT product_name, stock_quantity, price, product_sales FROM products WHERE item_id=" + productID, function(err, res) {
             var currentInventoryLevel = Number(res[0].stock_quantity);
             var purchaseQuantity = Number(answer.units);
+            var productSales = Number(res[0].product_sales);
             if (currentInventoryLevel < purchaseQuantity) {
                 console.log('Insufficient quantity!');
                 makeCustomerPurchase();
             } else {
                 var purchaseCost = Number(res[0].price) * purchaseQuantity;
+                productSales += purchaseCost;
                 var purchasedProductName = res[0].product_name;
                 console.log('Your total purchase price for ' + purchaseQuantity + ' units of product=' + purchasedProductName + ' is $' + purchaseCost);
 
-                connection.query("UPDATE products SET stock_quantity=" + (currentInventoryLevel-purchaseQuantity) + ' WHERE item_id=' + productID, function(err, res) {
+                connection.query("UPDATE products SET stock_quantity=" + (currentInventoryLevel-purchaseQuantity) + ", product_sales=" +  productSales + " WHERE item_id=" + productID, function(err, res) {
                     makeCustomerPurchase();
                 });                    
             }
