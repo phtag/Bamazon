@@ -22,10 +22,10 @@ getSupervisorAction();
 function getSupervisorAction() {
     inquirer
     .prompt({
-    name: "action",
-    type: "list",
-    choices: ['View Product Sales by Department',
-            'Create New Department'],
+        name: "action",
+        type: "list",
+        choices: ['View Product Sales by Department',
+                'Create New Department'],
     })
     .then(function(answer) {
         console.log(answer.action);

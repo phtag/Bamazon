@@ -46,7 +46,7 @@ function getManagerAction() {
 
             case 'View Low Inventory':
 
-                connection.query("SELECT item_id, product_name, department_name, price, stock_quantity FROM products WHERE stock_quantity < 500 ORDER BY stock_quantity ASC", function(err, res) {
+                connection.query("SELECT item_id, product_name, department_name, price, stock_quantity FROM products WHERE stock_quantity < 5 ORDER BY stock_quantity ASC", function(err, res) {
                     if (err) {
                         throw err;
                     }
@@ -85,9 +85,9 @@ function getProductID() {
 function getUnitsToItem(item_id) {
     inquirer
     .prompt({
-    name: "units_to_add",
-    type: "input",
-    message: "Please enter the number of units to add to inventory:",
+        name: "units_to_add",
+        type: "input",
+        message: "Please enter the number of units to add to inventory:",
     })
     .then(function(answer) {
         addUnitsToItem(item_id, answer.units_to_add);
