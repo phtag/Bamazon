@@ -132,10 +132,13 @@ function addNewProduct() {
                         console.log("Got here for product=" + product_name);
                         units = answer.units;
                         connection.query("SELECT COUNT(*) as numRecords FROM products", function(err, res) {
+                            // Don't really need this, but was just curious about how to get number of records in a table
+                            // in case the ID field was NOT auto-generated
                             var numRecords = res[0].numRecords;
+
                             console.log('numRecords='+numRecords);
-                            connection.query("INSERT INTO products (item_id, product_name, price, stock_quantity) VALUES (" + (numRecords+1) + ", '" + product_name + "'," + price + "," + units + ")", function(err, res) {
-                                if (err) {
+                            connection.query("INSERT INTO products (product_name, price, stock_quantity) VALUES ('" + product_name + "'," + price + "," + units + ")", function(err, res) {
+                                    if (err) {
                                     console.log(err);
                                     throw err;
                                 }
