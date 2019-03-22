@@ -46,7 +46,7 @@ function getManagerAction() {
 
             case 'View Low Inventory':
 
-                connection.query("SELECT item_id, product_name, price, stock_quantity FROM products WHERE stock_quantity < 500 ORDER BY stock_quantity ASC", function(err, res) {
+                connection.query("SELECT item_id, product_name, department_name, price, stock_quantity FROM products WHERE stock_quantity < 500 ORDER BY stock_quantity ASC", function(err, res) {
                     if (err) {
                         throw err;
                     }
@@ -98,7 +98,7 @@ function addUnitsToItem(item_id, units_to_add) {
         if (err) {
             throw err;
         }
-        connection.query("SELECT item_id, product_name, price, stock_quantity FROM products", function(err, res) {
+        connection.query("SELECT item_id, product_name, department_name, price, stock_quantity FROM products", function(err, res) {
             console.log('Viewing products...')
             console.table(res);
             getManagerAction();

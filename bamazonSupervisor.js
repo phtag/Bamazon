@@ -43,18 +43,10 @@ function getSupervisorAction() {
 
             case 'Create New Department':
 
-                // connection.query("SELECT item_id, product_name, price, stock_quantity FROM products WHERE stock_quantity < 500 ORDER BY stock_quantity ASC", function(err, res) {
-                //     if (err) {
-                //         throw err;
-                //     }
-                    console.log('Creating new department...')
-                    // console.table(res);
-                    // getManagerAction();
-                // });
+                addNewDepartment();
                 break;
 
             }
-        // getNumberOfUnitsDesired(answer.item_id);
     });
 }
 function addNewDepartment() {
@@ -74,7 +66,7 @@ function addNewDepartment() {
         })
         .then(function(answer) {
             over_head_costs = answer.over_head_costs;
-            connection.query("INSERT INTO departments (department_name, over_head_costs) VALUES ('" + department_name + "'," + over_head_costs, function(err, res) {
+            connection.query("INSERT INTO departments (department_name, over_head_costs) VALUES ('" + department_name + "'," + over_head_costs + ")", function(err, res) {
                 if (err) {
                     console.log(err);
                     throw err;
