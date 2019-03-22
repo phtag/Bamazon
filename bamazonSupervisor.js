@@ -32,7 +32,7 @@ function getSupervisorAction() {
         switch (answer.action) {
             case 'View Product Sales by Department':
 
-                connection.query("SELECT department_id, department_name, SUM(product_sales) FROM departments INNER JOIN products USING (department_name) GROUP BY department_name", function(err, res) {
+                connection.query("SELECT department_id, department_name, over_head_costs, SUM(product_sales) AS 'Total Sales', (SUM(product_sales) - over_head_costs) AS Profits FROM departments INNER JOIN products USING (department_name) GROUP BY department_name", function(err, res) {
                     if (err) {
                         throw err;
                     }
