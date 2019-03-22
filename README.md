@@ -8,10 +8,7 @@ This project uses Node.js and myDQL to create a software-based store where custo
 * Manager
 * Supervisor
 
-Each of these programs provides different menus that the users can select from to perform various functions.
-
-[Bamazon store demo video](https://github.com/phtag/Bamazon/blob/master/images/Bamazon-customer-demo.gif)
-      
+Each of these programs provides different menus that the users can select from to perform various functions. See screen shots and videos for each of these programs, below.
 
 NOTE: This project is referenced on my portfolio page at [my portfolio](https://phtag.github.io/Updated-portfolio/)
 
@@ -26,6 +23,7 @@ To play the game, you will need to copy the package.json file for this project t
 After installing this packages, copy all of the files from the repository to your node.js root node. You will be running the store programs using the BamazonCustomer.js, BamazonManager.js, and BamazonSupervisor.js files in node.js. 
 
 ### Customers
+[Bamazon store demo video](https://github.com/phtag/Bamazon/blob/master/images/Bamazon-customer-demo.gif)
 For the customer program, customers can:
 * View the existing collection of products available in the store
 * Purchase products
@@ -35,6 +33,7 @@ Purchases consist of a selected product which is done by ID and a purchase quant
 ![Customer program Screenshot](/images/Bamazon-customer-screenShot.jpg)
 
 ### Managers
+[Bamazon store demo video](https://github.com/phtag/Bamazon/blob/master/images/Bamazon-manager-demo.gif)
 For the manager program, managers can:
 * View all products
 * View a listing of all products having inventory levels below 5 
@@ -44,6 +43,7 @@ For the manager program, managers can:
 ![Customer program Screenshot](/images/Bamazon-manager-screenShot.jpg)
 
 ### Supervisors
+[Bamazon store demo video](https://github.com/phtag/Bamazon/blob/master/images/Bamazon-supervisor-demo.gif)
 For the supervisor program, supervisors can:
 * View product sales by department
 * Create new departments
