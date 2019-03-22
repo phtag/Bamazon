@@ -10,7 +10,7 @@ This project uses Node.js and myDQL to create a software-based store where custo
 
 Each of these programs provides different menus that the users can select from to perform various functions.
 
-[Bamazon store demo video](https://github.com/phtag/Constructor-Word-Guess/blob/master/Word-game-demo.gif)
+[Bamazon store demo video](https://github.com/phtag/Bamazon/blob/master/Word-game-demo.gif)
 
 NOTE: This project is referenced on my portfolio page at [my portfolio](https://phtag.github.io/Updated-portfolio/)
 
